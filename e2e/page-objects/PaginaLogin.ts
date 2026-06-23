@@ -13,6 +13,7 @@ export default class PaginaLogin {
         this.inputEmail = page.getByTestId('input-email');
         this.inputSenha = page.getByTestId('input-senha');
         this.botaoAcessarConta = page.getByTestId('botao-acessar-conta');
+
     }
 
     async visitar() {
@@ -37,4 +38,17 @@ export default class PaginaLogin {
         const elementoErro = this.page.getByText(mensagem);
         await expect(elementoErro).toBeVisible();
     }
+
+    async loginInvalido(email: string, senha: string) {
+        await this.botaoLogin.click();
+        await this.inputEmail.fill(email)
+        await this.inputSenha.fill(senha)
+    }
+
+    async mensagemInvalido(mensagem: string) {
+        const emailInvalido = this.page.getByText(mensagem);
+        await expect(emailInvalido).toBeVisible();
+    }
+
+
 }
